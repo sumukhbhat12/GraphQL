@@ -1,0 +1,62 @@
+Get All Users
+# query GetAllUsers {
+#   users {
+#     id
+#     name
+#     username
+#     nationality
+#   }
+# }
+
+
+Get User by userId
+# query GetUser($userId: ID!) {
+#   user(id: $userId) {
+#     name
+#     age
+#   }
+# }
+
+Get All Movies
+# query GetMovies{
+#   movies {
+#     name
+#     releaseYear
+#   }
+# }
+
+Get Movie by Movie Name
+# query GetMovie($name: String!) {
+#   movie(name: $name) {
+#     name
+#     releaseYear
+#     language
+#   }
+# }
+
+Create a new User and insert it into the List of Users
+# mutation CreateUser($input: CreateUserInput!) {
+#   createUser(input: $input) {
+#     id
+#     name
+#     username
+#     age
+#     nationality
+#   }
+# }
+
+Update an Existing User's username
+# mutation UpdateUsername($input: UpdateUsernameInput!) {
+#   updateUsername(input: $input) {
+#     id
+#     username
+#   }
+# }
+
+Delete an Existing User
+# mutation DeleteUser($input: DeleteUserInput) {
+#   deleteUser(input: $input) {
+#     id
+#     name
+#   }
+# }
