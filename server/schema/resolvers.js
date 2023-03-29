@@ -65,6 +65,26 @@ const resolvers = {
                 }
             });
             return deletedUser;
+        },
+
+        createMovie: (parent,args) => {
+            const movie = args.input;
+            const lastId = MovieList[MovieList.length - 1].id;
+            movie.id = lastId + 1;
+            MovieList.push(movie);
+            return movie;
+        },
+
+        deleteMovie: (parent, args) => {
+            const id = args.input.id;
+            let deletedMovie;
+            _.remove(MovieList, (movie) => {
+                if(movie.id === Number(id)){
+                    deletedMovie = movie;
+                    return true;
+                }
+            });
+            return deletedMovie;
         }
     }
 }

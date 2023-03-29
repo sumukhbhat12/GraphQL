@@ -1,4 +1,3 @@
-
 export const DisplayData = () => {
     return (
         <div>

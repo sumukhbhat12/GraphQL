@@ -11,7 +11,6 @@ const QUERY_USER = gql`
     }
 `;
 
-
 export const User = () => {
 
     const [userid, setUserid] = useState('');
@@ -28,14 +27,17 @@ export const User = () => {
                 id: userid,
             },}); } }>Get Data</button>
             <div>{
-                responseUser
-                &&
+                responseUser &&
                 <div key={responseUser.user.id}>
                     <h3>Name: {responseUser.user.name}</h3>
                     <h3>Username: {responseUser.user.username}</h3>
                     <h3>Age: {responseUser.user.age}</h3>
                 </div>
-            }
+                }
+                {
+                responseError &&
+                <h3>Error! Couldn't retrieve the data.</h3>
+                }
             </div>
         </div>
     )

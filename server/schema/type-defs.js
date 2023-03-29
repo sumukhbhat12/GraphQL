@@ -44,10 +44,23 @@ const typeDefs = gql`
         id:ID!
     }
 
+    input CreateMovieInput {
+        name: String!
+        releaseYear: Int!
+        currentlyAiring: Boolean!
+        language: Language!
+    }
+
+    input DeleteMovieInput {
+        id:ID!
+    }
+
     type Mutation {
         createUser(input: CreateUserInput!): User!
         updateUsername(input: UpdateUsernameInput!): User
         deleteUser(input: DeleteUserInput): User
+        createMovie(input: CreateMovieInput!): Movie!
+        deleteMovie(input: DeleteMovieInput!): Movie!
     }
 
     
@@ -58,6 +71,7 @@ const typeDefs = gql`
         ENGLAND
         JAPAN
         CHINA
+        AUSTRALIA
     }
 
     enum Language {
