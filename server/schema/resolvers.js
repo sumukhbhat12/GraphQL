@@ -2,11 +2,29 @@ const { UserList, MovieList, FavoriteMoviesList } = require('../FakeData');
 const _ = require('lodash');
 
 const resolvers = {
+
+    //Below resolver is used to check whether returned obj from the users resolver is a successful users object or an error message object
+    UsersResult: {
+        __resolveType(obj) {
+            if(obj.users) {
+                return "UsersSuccessfulResult";
+            }
+            if(obj.message){
+                return "UsersErrorResult";
+            }
+            return null;    //GraphQL error, not the error from data retrieval from the database or storage
+        }
+    },
+
     Query: {
 
         //User Resolvers
+        //users returns UsersResult type which is an object that contains users if the query is successful or message string if the query is a failure
         users: () => {
-            return UserList;
+            if(UserList)
+                return {users: UserList};   //UsersSuccessfulResult object
+
+            return {message: "There was an Error in the retriving of the data"}  //USersErrorResult object
         },
         user: (parent, args) => {
             const id = args.id;

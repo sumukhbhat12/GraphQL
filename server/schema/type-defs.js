@@ -11,8 +11,6 @@ const typeDefs = gql`
         favoriteMovies: [Movie]
     }
 
-    
-
     type Movie {
         id: ID!
         name: String!
@@ -21,8 +19,21 @@ const typeDefs = gql`
         language: Language!
     }
 
-    type Query {
+    #Return [User!]! if the query is successful
+    type UsersSuccessfulResult {
         users: [User!]!
+    }
+
+    #Return a String if the query is unsuccessful
+    type UsersErrorResult {
+        message: String!
+    }
+
+    #Create 2 different types from both the successful and failure results and make a union of them as the Type of the Result
+    union UsersResult = UsersSuccessfulResult | UsersErrorResult
+
+    type Query {
+        users: UsersResult
         user(id: ID!): User!
         movies: [Movie!]!
         movie(name: String!): Movie!
@@ -63,8 +74,6 @@ const typeDefs = gql`
         deleteMovie(input: DeleteMovieInput!): Movie!
     }
 
-    
-
     enum Nationality {
         INDIA
         US
@@ -79,6 +88,7 @@ const typeDefs = gql`
         JAPANESE
         HINDI
     }
+    
 `;
 
 module.exports = { typeDefs }

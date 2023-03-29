@@ -25,8 +25,12 @@ export const DeleteMovie = () => {
     const [movieId, setMovieId] = useState('');
     const navigate = useNavigate();
 
-    const [ deleteMovie ] = useMutation(DELETE_MOVIE_MUTATION);
-    const { data: responseMovies, error: responseError } = useQuery(GET_MOVIES_QUERY);
+    const [ deleteMovie, {error: responseError} ] = useMutation(DELETE_MOVIE_MUTATION);
+    const { data: responseMovies } = useQuery(GET_MOVIES_QUERY);
+
+    if(responseError){
+        console.log(responseError);
+    }
 
     return (
         <div>
